@@ -151,7 +151,7 @@ const MUIDrawer: FC<PropsWithChildren> = ({ children }) => {
         <Divider />
         <List>
           {MENU_ITEMS.map(({ route, id, Icon, name }) => (
-            <Link key={id} to={route} className="link">
+            <Link key={id} to={route} className="link" title={name}>
               <ListItem disablePadding sx={{ display: "block" }}>
                 <ListItemButton
                   sx={{

@@ -51,11 +51,6 @@ const Tasks: FC = () => {
   };
 
   const handleDeleteClick = (id: GridRowId) => () => {
-    // if (Array.isArray(tasks)) {
-    //   const foundTask = tasks.find((task: Task) => task.id === id);
-
-    //   dispatch(removeTask(foundTask));
-    // }
     dispatch(removeTask(id));
   };
 
@@ -91,15 +86,16 @@ const Tasks: FC = () => {
               <GridActionsCellItem
                 icon={<EditIcon />}
                 label="Edit"
-                className="textPrimary"
                 onClick={handleEditClick(id)}
                 color="inherit"
+                title="Edit the task"
               />,
               <GridActionsCellItem
                 icon={<DeleteIcon />}
                 label="Delete"
                 onClick={handleDeleteClick(id)}
                 color="inherit"
+                title="Delete the task"
               />,
             ];
           }
@@ -108,15 +104,16 @@ const Tasks: FC = () => {
         flex: 1,
       },
     ];
-  }, [selectedTasks, editableTask]);
+  }, [selectedTasks, tasks]);
 
   return (
     <>
+      <h2>Tasks</h2>
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <Fab aria-label="add" onClick={handleOpen}>
+        <Fab size="medium" aria-label="add" onClick={handleOpen}>
           <AddIcon />
         </Fab>
-        <Typography variant="h5">Add Task</Typography>
+        <Typography variant="h6">Add Task</Typography>
       </Box>
       <Box sx={{ marginTop: "30px" }}>
         <MUIDataGrid

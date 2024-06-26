@@ -63,6 +63,15 @@ const tasksSlice = createSlice({
         state.trash.push(removedTask);
       }
     },
+    restoreTask: (state, action: PayloadAction<GridRowId>) => {
+      const index = state.trash.findIndex((task) => task.id === action.payload);
+
+      if (index !== -1) {
+        const [removedTask] = state.trash.splice(index, 1);
+        removedTask.status = "pending";
+        state.tasks.push(removedTask);
+      }
+    },
     markTaskAsComplete: (state, action: PayloadAction<string>) => {
       const index = state.tasks.findIndex((task) => task.id === action.payload);
       if (index !== -1 && state.tasks[index].status !== "overdue") {
@@ -80,6 +89,7 @@ export const {
   addTask,
   editTask,
   removeTask,
+  restoreTask,
   markTaskAsComplete,
   markTaskAsOverdue,
 } = tasksSlice.actions;
