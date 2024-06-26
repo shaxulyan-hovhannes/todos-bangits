@@ -1,4 +1,4 @@
-import { FC, FormEvent } from "react";
+import { FC, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,20 +15,23 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 import MUITextField from "components/ui/drawer/text-field/text-field";
 
-import { addTask } from "store/reducers/tasks";
+import { addTask, Task, editTask } from "store/reducers/tasks";
+
+import { MAIN_THEME_COLOR } from "constants/common";
 
 interface DialogProps {
   open: boolean;
   handleClose: () => void;
-  editMode: boolean;
+  editableTask: Task | null;
 }
 
 const FormDialog: FC<DialogProps> = ({
   open = false,
   handleClose = () => {},
-  editMode = false,
+  editableTask = null,
 }) => {
   const dispatch = useDispatch();
+  console.log("editableTask", editableTask);
 
   const formik = useFormik({
     initialValues: {
@@ -47,7 +50,17 @@ const FormDialog: FC<DialogProps> = ({
     }),
     onSubmit: (values) => {
       try {
-        dispatch(addTask(values));
+        if (editableTask) {
+          dispatch(
+            editTask({
+              ...values,
+              id: editableTask.id,
+            })
+          );
+        } else {
+          dispatch(addTask(values));
+        }
+
         console.log("SUBMIT VALUES", values);
         formik.resetForm();
         handleClose();
@@ -59,9 +72,16 @@ const FormDialog: FC<DialogProps> = ({
     },
   });
 
-  const tasks = useSelector((state) => state);
-
-  console.log("TASKS", tasks);
+  useEffect(() => {
+    if (editableTask) {
+      formik.setValues({
+        title: editableTask.title,
+        description: editableTask.description ?? "",
+        status: editableTask.status,
+        deadline: editableTask.deadline ?? "",
+      });
+    }
+  }, [editableTask]);
 
   return open ? (
     <Dialog
@@ -71,7 +91,7 @@ const FormDialog: FC<DialogProps> = ({
         onSubmit: formik.handleSubmit,
       }}
     >
-      <DialogTitle>{editMode ? "Edit Task" : "Create Task"}</DialogTitle>
+      <DialogTitle>{editableTask ? "Edit Task" : "Create Task"}</DialogTitle>
       <DialogContent className={styles.dialogContent}>
         <Box className={styles.fieldWrapper}>
           <MUITextField
@@ -108,8 +128,19 @@ const FormDialog: FC<DialogProps> = ({
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button type="submit">Subscribe</Button>
+        <Button sx={{ color: "inherit" }} onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button
+          sx={{
+            backgroundColor: MAIN_THEME_COLOR,
+            color: "white",
+            "&:hover": { backgroundColor: MAIN_THEME_COLOR, color: "white" },
+          }}
+          type="submit"
+        >
+          Create
+        </Button>
       </DialogActions>
     </Dialog>
   ) : null;

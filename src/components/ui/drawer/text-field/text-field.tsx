@@ -1,6 +1,8 @@
 import { FC, ChangeEvent, ComponentPropsWithoutRef } from "react";
 
-import { TextField, Button } from "@mui/material";
+import { TextField } from "@mui/material";
+
+import { MAIN_THEME_COLOR } from "constants/common";
 
 interface TextFieldProps extends ComponentPropsWithoutRef<"input"> {
   name: string;
@@ -34,6 +36,19 @@ const MUITextField: FC<TextFieldProps> = ({
       onChange={onChange}
       error={error}
       helperText={helperText}
+      sx={{
+        "& .MuiOutlinedInput-root": {
+          "& fieldset": {
+            borderColor: MAIN_THEME_COLOR,
+          },
+          "&:hover fieldset": {
+            borderColor: MAIN_THEME_COLOR,
+          },
+          "&.Mui-focused fieldset": {
+            borderColor: MAIN_THEME_COLOR,
+          },
+        },
+      }}
     />
   );
 };

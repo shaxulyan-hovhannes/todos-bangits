@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
   description?: string;
@@ -8,13 +8,28 @@ interface Task {
   status: string;
 }
 
-interface TasksState {
+export interface TasksState {
   tasks: Task[];
   trash: Task[];
 }
 
 const initialState: TasksState = {
-  tasks: [],
+  tasks: [
+    {
+      id: "1",
+      title: "Title",
+      description: "dslfldsj",
+      deadline: new Date().toLocaleDateString(),
+      status: "pending",
+    },
+    {
+      id: "2",
+      title: "Title2",
+      description: "dsafk;dskfdslfldsj",
+      deadline: new Date().toLocaleDateString(),
+      status: "pending",
+    },
+  ],
   trash: [],
 };
 
@@ -23,11 +38,13 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action: PayloadAction<Omit<Task, "id">>) => {
+      console.log("action.payload.deadline", action.payload.deadline);
       const newTask = {
         ...action.payload,
         id: String(Date.now()),
         status: "pending" as const,
       };
+
       state.tasks.push(newTask);
     },
     editTask: (state, action: PayloadAction<Task>) => {
