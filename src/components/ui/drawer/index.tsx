@@ -18,8 +18,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 
 import { DRAWER_WIDTH, MAIN_THEME_COLOR, MENU_ITEMS } from "constants/common";
 
@@ -49,7 +47,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -138,7 +135,11 @@ const MUIDrawer: FC<PropsWithChildren> = ({ children }) => {
             paddingLeft: "22px",
           }}
         >
-          <img src="https://bangits.com/img/logo.svg" className="logo" />
+          <img
+            src="https://bangits.com/img/logo.svg"
+            className="logo"
+            alt="logo"
+          />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
@@ -150,8 +151,8 @@ const MUIDrawer: FC<PropsWithChildren> = ({ children }) => {
         <Divider />
         <List>
           {MENU_ITEMS.map(({ route, id, Icon, name }) => (
-            <Link to={route} className="link">
-              <ListItem key={id} disablePadding sx={{ display: "block" }}>
+            <Link key={id} to={route} className="link">
+              <ListItem disablePadding sx={{ display: "block" }}>
                 <ListItemButton
                   sx={{
                     minHeight: 48,

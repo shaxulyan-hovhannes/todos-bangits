@@ -1,0 +1,12 @@
+.dialogContent {
+  padding-top: 5px !important;
+}
+
+.fieldWrapper {
+  width: 400px;
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
