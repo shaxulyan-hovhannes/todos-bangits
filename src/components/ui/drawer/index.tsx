@@ -92,7 +92,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const MiniDrawer: FC<PropsWithChildren> = ({ children }) => {
+const MUIDrawer: FC<PropsWithChildren> = ({ children }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -184,4 +184,4 @@ const MiniDrawer: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export default MiniDrawer;
+export default MUIDrawer;
