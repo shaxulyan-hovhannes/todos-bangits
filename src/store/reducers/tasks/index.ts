@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+import { GridRowId } from "@mui/x-data-grid";
+
 export interface Task {
   id: string;
   title: string;
@@ -53,7 +55,7 @@ const tasksSlice = createSlice({
       );
       if (index !== -1) state.tasks[index] = action.payload;
     },
-    removeTask: (state, action: PayloadAction<string>) => {
+    removeTask: (state, action: PayloadAction<GridRowId>) => {
       const index = state.tasks.findIndex((task) => task.id === action.payload);
       if (index !== -1) {
         const [removedTask] = state.tasks.splice(index, 1);

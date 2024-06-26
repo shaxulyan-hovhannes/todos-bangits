@@ -1,5 +1,5 @@
-import { FC, useState, useMemo, SetStateAction } from "react";
-import { useSelector } from "react-redux";
+import { FC, useState, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
@@ -10,13 +10,12 @@ import MUIDataGrid from "components/ui/table";
 import {
   GridColDef,
   GridActionsCellItem,
-  GridRowsProp,
   GridRowSelectionModel,
   GridRowId,
 } from "@mui/x-data-grid";
 
 import useFormDialog from "hooks/useDialog";
-import { TasksState, Task } from "store/reducers/tasks";
+import { TasksState, Task, removeTask } from "store/reducers/tasks";
 
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
@@ -25,6 +24,8 @@ import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 const Tasks: FC = () => {
   const [selectedTasks, setSelectedTasks] = useState<GridRowSelectionModel>([]);
   const [editableTask, setEditableTask] = useState<null | Task>(null);
+
+  const dispatch = useDispatch();
 
   const { open, handleOpen, handleClose } = useFormDialog();
 
@@ -37,6 +38,8 @@ const Tasks: FC = () => {
     return [];
   });
 
+  console.log("TASKS", tasks);
+
   const handleEditClick = (id: GridRowId) => () => {
     if (Array.isArray(tasks)) {
       const foundTask = tasks.find((task: Task) => task.id === id);
@@ -45,6 +48,15 @@ const Tasks: FC = () => {
     }
 
     handleOpen();
+  };
+
+  const handleDeleteClick = (id: GridRowId) => () => {
+    // if (Array.isArray(tasks)) {
+    //   const foundTask = tasks.find((task: Task) => task.id === id);
+
+    //   dispatch(removeTask(foundTask));
+    // }
+    dispatch(removeTask(id));
   };
 
   const columns: GridColDef[] = useMemo(() => {
@@ -86,7 +98,7 @@ const Tasks: FC = () => {
               <GridActionsCellItem
                 icon={<DeleteIcon />}
                 label="Delete"
-                // onClick={handleDeleteClick(id)}
+                onClick={handleDeleteClick(id)}
                 color="inherit"
               />,
             ];

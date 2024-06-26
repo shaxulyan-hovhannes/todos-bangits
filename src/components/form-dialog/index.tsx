@@ -61,7 +61,6 @@ const FormDialog: FC<DialogProps> = ({
           dispatch(addTask(values));
         }
 
-        console.log("SUBMIT VALUES", values);
         formik.resetForm();
         handleClose();
       } catch (err) {
@@ -81,6 +80,10 @@ const FormDialog: FC<DialogProps> = ({
         deadline: editableTask.deadline ?? "",
       });
     }
+
+    return () => {
+      formik.resetForm();
+    };
   }, [editableTask]);
 
   return open ? (
@@ -139,7 +142,7 @@ const FormDialog: FC<DialogProps> = ({
           }}
           type="submit"
         >
-          Create
+          {editableTask ? "Edit" : "Create"}
         </Button>
       </DialogActions>
     </Dialog>
