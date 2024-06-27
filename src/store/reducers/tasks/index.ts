@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { GridRowId } from "@mui/x-data-grid";
+import { GridRowId } from '@mui/x-data-grid';
 
 export interface Task {
   id: string;
@@ -18,32 +18,32 @@ export interface TasksState {
 const initialState: TasksState = {
   tasks: [
     {
-      id: "1",
-      title: "Task 1",
-      description: "Task 1 description",
+      id: '1',
+      title: 'Task 1',
+      description: 'Task 1 description',
       deadline: new Date().toLocaleDateString(),
-      status: "pending",
+      status: 'pending',
     },
     {
-      id: "2",
-      title: "Task 2",
-      description: "Task 2 description",
+      id: '2',
+      title: 'Task 2',
+      description: 'Task 2 description',
       deadline: new Date().toLocaleDateString(),
-      status: "pending",
+      status: 'pending',
     },
   ],
   trash: [],
 };
 
 const tasksSlice = createSlice({
-  name: "tasks",
+  name: 'tasks',
   initialState,
   reducers: {
-    addTask: (state, action: PayloadAction<Omit<Task, "id">>) => {
+    addTask: (state, action: PayloadAction<Omit<Task, 'id'>>) => {
       const newTask = {
         ...action.payload,
         id: String(Date.now()),
-        status: "pending" as const,
+        status: 'pending' as const,
       };
 
       state.tasks.push(newTask);
@@ -58,7 +58,7 @@ const tasksSlice = createSlice({
       const index = state.tasks.findIndex((task) => task.id === action.payload);
       if (index !== -1) {
         const [removedTask] = state.tasks.splice(index, 1);
-        removedTask.status = "removed";
+        removedTask.status = 'removed';
         state.trash.push(removedTask);
       }
     },
@@ -67,19 +67,19 @@ const tasksSlice = createSlice({
 
       if (index !== -1) {
         const [removedTask] = state.trash.splice(index, 1);
-        removedTask.status = "pending";
+        removedTask.status = 'pending';
         state.tasks.push(removedTask);
       }
     },
     markTaskAsComplete: (state, action: PayloadAction<GridRowId>) => {
       const index = state.tasks.findIndex((task) => task.id === action.payload);
-      if (index !== -1 && state.tasks[index].status !== "overdue") {
-        state.tasks[index].status = "completed";
+      if (index !== -1 && state.tasks[index].status !== 'overdue') {
+        state.tasks[index].status = 'completed';
       }
     },
     markTaskAsOverdue: (state, action: PayloadAction<GridRowId>) => {
       const index = state.tasks.findIndex((task) => task.id === action.payload);
-      if (index !== -1) state.tasks[index].status = "overdue";
+      if (index !== -1) state.tasks[index].status = 'overdue';
     },
   },
 });

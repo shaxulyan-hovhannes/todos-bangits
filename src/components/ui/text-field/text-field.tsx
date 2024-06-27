@@ -1,10 +1,10 @@
-import { FC, ChangeEvent, ComponentPropsWithoutRef } from "react";
+import { FC, ChangeEvent, ComponentPropsWithoutRef } from 'react';
 
-import { TextField } from "@mui/material";
+import { TextField } from '@mui/material';
 
-import { MAIN_THEME_COLOR } from "constants/common";
+import { MAIN_THEME_COLOR } from 'constants/common';
 
-interface TextFieldProps extends ComponentPropsWithoutRef<"input"> {
+interface TextFieldProps extends ComponentPropsWithoutRef<'input'> {
   name: string;
   label?: string;
   value: string;
@@ -16,14 +16,14 @@ interface TextFieldProps extends ComponentPropsWithoutRef<"input"> {
 }
 
 const MUITextField: FC<TextFieldProps> = ({
-  name = "",
-  label = "",
-  value = "",
+  name = '',
+  label = '',
+  value = '',
   onChange = () => {},
   error = false,
-  helperText = "",
+  helperText = '',
   multiline = false,
-  type = "text",
+  type = 'text',
 }) => {
   return (
     <TextField
@@ -37,14 +37,14 @@ const MUITextField: FC<TextFieldProps> = ({
       error={error}
       helperText={helperText}
       sx={{
-        "& .MuiOutlinedInput-root": {
-          "& fieldset": {
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
             borderColor: MAIN_THEME_COLOR,
           },
-          "&:hover fieldset": {
+          '&:hover fieldset': {
             borderColor: MAIN_THEME_COLOR,
           },
-          "&.Mui-focused fieldset": {
+          '&.Mui-focused fieldset': {
             borderColor: MAIN_THEME_COLOR,
           },
         },

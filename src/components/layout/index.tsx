@@ -1,12 +1,12 @@
-import { FC, Suspense, Fragment, lazy } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { FC, Suspense, Fragment, lazy } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-import MUIDrawer from "components/ui/drawer";
+import MUIDrawer from 'components/ui/drawer';
 
-import { ROUTES } from "constants/common";
+import { ROUTES } from 'constants/common';
 
-const Tasks = lazy(() => import("components/pages/tasks"));
-const TasksTrash = lazy(() => import("components/pages/tasks-trash"));
+const Tasks = lazy(() => import('components/pages/tasks'));
+const TasksTrash = lazy(() => import('components/pages/tasks-trash'));
 
 const Layout: FC = () => {
   return (

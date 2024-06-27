@@ -1,9 +1,9 @@
-import { useState, FC } from "react";
-import Box from "@mui/material/Box";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/DeleteOutlined";
-import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Close";
+import { useState, FC } from 'react';
+import Box from '@mui/material/Box';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Close';
 import {
   GridRowsProp,
   GridRowModesModel,
@@ -13,7 +13,7 @@ import {
   GridActionsCellItem,
   GridRowId,
   GridRowSelectionModel,
-} from "@mui/x-data-grid";
+} from '@mui/x-data-grid';
 
 interface TableProps {
   columns: GridColDef[];
@@ -42,12 +42,12 @@ const MUIDataGrid: FC<TableProps> = ({
     <Box
       sx={{
         height: 500,
-        width: "100%",
-        "& .actions": {
-          color: "text.secondary",
+        width: '100%',
+        '& .actions': {
+          color: 'text.secondary',
         },
-        "& .textPrimary": {
-          color: "text.primary",
+        '& .textPrimary': {
+          color: 'text.primary',
         },
       }}
     >
@@ -58,11 +58,11 @@ const MUIDataGrid: FC<TableProps> = ({
         checkboxSelection={rows.length > 0}
         isCellEditable={() => false}
         sx={{
-          "& .MuiDataGrid-cell:focus": {
-            outline: "none",
+          '& .MuiDataGrid-cell:focus': {
+            outline: 'none',
           },
-          "& .MuiDataGrid-columnHeader:focus": {
-            outline: "none",
+          '& .MuiDataGrid-columnHeader:focus': {
+            outline: 'none',
           },
         }}
         onRowSelectionModelChange={onRowSelectionModelChange}

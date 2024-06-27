@@ -1,20 +1,20 @@
-import { FC, useState, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { FC, useState, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import Box from "@mui/material/Box";
+import Box from '@mui/material/Box';
 
-import MUIDataGrid from "components/ui/table";
+import MUIDataGrid from 'components/ui/table';
 
 import {
   GridColDef,
   GridActionsCellItem,
   GridRowSelectionModel,
   GridRowId,
-} from "@mui/x-data-grid";
+} from '@mui/x-data-grid';
 
-import { TasksState, Task, restoreTask } from "store/reducers/tasks";
+import { TasksState, Task, restoreTask } from 'store/reducers/tasks';
 
-import RestorePageIcon from "@mui/icons-material/RestorePage";
+import RestorePageIcon from '@mui/icons-material/RestorePage';
 
 const TasksTrash: FC = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const TasksTrash: FC = () => {
   const tasksTrash: Task[] | unknown = useSelector((state: TasksState) => {
     const tasks = state.tasks;
 
-    if ("trash" in tasks) {
+    if ('trash' in tasks) {
       return tasks.trash;
     }
     return [];
@@ -36,20 +36,20 @@ const TasksTrash: FC = () => {
 
   const columns: GridColDef[] = useMemo(() => {
     return [
-      { field: "title", headerName: "Title", flex: 1 },
+      { field: 'title', headerName: 'Title', flex: 1 },
       {
-        field: "description",
-        headerName: "Description",
+        field: 'description',
+        headerName: 'Description',
         flex: 1,
       },
       {
-        field: "status",
-        headerName: "Status",
+        field: 'status',
+        headerName: 'Status',
         flex: 1,
         renderCell: (params) => (
           <span
             style={{
-              color: "red",
+              color: 'red',
             }}
           >
             {params.value}
@@ -57,16 +57,16 @@ const TasksTrash: FC = () => {
         ),
       },
       {
-        field: "deadline",
-        headerName: "Deadline",
+        field: 'deadline',
+        headerName: 'Deadline',
         editable: true,
         flex: 1,
       },
       {
-        field: "actions",
-        type: "actions",
-        headerName: "Actions",
-        cellClassName: "actions",
+        field: 'actions',
+        type: 'actions',
+        headerName: 'Actions',
+        cellClassName: 'actions',
         getActions: ({ id }) => {
           const isSelected = selectedTasks.includes(id);
 
@@ -91,7 +91,7 @@ const TasksTrash: FC = () => {
   return (
     <>
       <h2>Tasks Trash</h2>
-      <Box sx={{ marginTop: "30px" }}>
+      <Box sx={{ marginTop: '30px' }}>
         <MUIDataGrid
           columns={columns}
           rows={tasksTrash}

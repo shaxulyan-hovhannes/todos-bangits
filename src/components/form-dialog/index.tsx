@@ -1,23 +1,23 @@
-import { FC, useEffect } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { FC, useEffect } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
 
-import styles from "./index.module.scss";
+import styles from './index.module.scss';
 
-import Button from "@mui/material/Button";
+import Button from '@mui/material/Button';
 
-import Box from "@mui/material/Box";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
+import Box from '@mui/material/Box';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
-import MUITextField from "components/ui/text-field/text-field";
+import MUITextField from 'components/ui/text-field/text-field';
 
-import { addTask, Task, editTask } from "store/reducers/tasks";
+import { addTask, Task, editTask } from 'store/reducers/tasks';
 
-import { MAIN_THEME_COLOR } from "constants/common";
+import { MAIN_THEME_COLOR } from 'constants/common';
 
 interface DialogProps {
   open: boolean;
@@ -34,18 +34,18 @@ const FormDialog: FC<DialogProps> = ({
 
   const formik = useFormik({
     initialValues: {
-      title: "",
-      description: "",
-      deadline: "",
-      status: "pending",
+      title: '',
+      description: '',
+      deadline: '',
+      status: 'pending',
     },
     validationSchema: Yup.object({
-      title: Yup.string().required("Required"),
+      title: Yup.string().required('Required'),
       description: Yup.string(),
       deadline: Yup.date().nullable(),
       status: Yup.string()
-        .oneOf(["pending", "completed", "overdue", "removed"], "Invalid status")
-        .required("Status is required"),
+        .oneOf(['pending', 'completed', 'overdue', 'removed'], 'Invalid status')
+        .required('Status is required'),
     }),
     onSubmit: (values) => {
       try {
@@ -54,7 +54,7 @@ const FormDialog: FC<DialogProps> = ({
             editTask({
               ...values,
               id: editableTask.id,
-            })
+            }),
           );
         } else {
           dispatch(addTask(values));
@@ -74,9 +74,9 @@ const FormDialog: FC<DialogProps> = ({
     if (editableTask) {
       formik.setValues({
         title: editableTask.title,
-        description: editableTask.description ?? "",
+        description: editableTask.description ?? '',
         status: editableTask.status,
-        deadline: editableTask.deadline ?? "",
+        deadline: editableTask.deadline ?? '',
       });
     }
 
@@ -89,11 +89,11 @@ const FormDialog: FC<DialogProps> = ({
     <Dialog
       open
       PaperProps={{
-        component: "form",
+        component: 'form',
         onSubmit: formik.handleSubmit,
       }}
     >
-      <DialogTitle>{editableTask ? "Edit Task" : "Create Task"}</DialogTitle>
+      <DialogTitle>{editableTask ? 'Edit Task' : 'Create Task'}</DialogTitle>
       <DialogContent className={styles.dialogContent}>
         <Box className={styles.fieldWrapper}>
           <MUITextField
@@ -130,18 +130,18 @@ const FormDialog: FC<DialogProps> = ({
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button sx={{ color: "inherit" }} onClick={handleClose}>
+        <Button sx={{ color: 'inherit' }} onClick={handleClose}>
           Cancel
         </Button>
         <Button
           sx={{
             backgroundColor: MAIN_THEME_COLOR,
-            color: "white",
-            "&:hover": { backgroundColor: MAIN_THEME_COLOR, color: "white" },
+            color: 'white',
+            '&:hover': { backgroundColor: MAIN_THEME_COLOR, color: 'white' },
           }}
           type="submit"
         >
-          {editableTask ? "Edit" : "Create"}
+          {editableTask ? 'Edit' : 'Create'}
         </Button>
       </DialogActions>
     </Dialog>
