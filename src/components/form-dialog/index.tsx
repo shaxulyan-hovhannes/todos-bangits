@@ -31,7 +31,6 @@ const FormDialog: FC<DialogProps> = ({
   editableTask = null,
 }) => {
   const dispatch = useDispatch();
-  console.log("editableTask", editableTask);
 
   const formik = useFormik({
     initialValues: {

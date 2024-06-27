@@ -6,6 +6,7 @@ const MAIN_THEME_COLOR = "#085769";
 const DRAWER_WIDTH = 250;
 
 const ROUTES = {
+  base: "/",
   tasks: "/tasks",
   tasksTrash: "/tasks-trash",
 };

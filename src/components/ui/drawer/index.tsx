@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -90,6 +90,8 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const MUIDrawer: FC<PropsWithChildren> = ({ children }) => {
+  const location = useLocation();
+
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -152,7 +154,15 @@ const MUIDrawer: FC<PropsWithChildren> = ({ children }) => {
         <List>
           {MENU_ITEMS.map(({ route, id, Icon, name }) => (
             <Link key={id} to={route} className="link" title={name}>
-              <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItem
+                disablePadding
+                sx={{
+                  display: "block",
+                  backgroundColor:
+                    location.pathname === route ? "gray" : "inherit",
+                  color: location.pathname === route ? "white" : "inherit",
+                }}
+              >
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -167,7 +177,12 @@ const MUIDrawer: FC<PropsWithChildren> = ({ children }) => {
                       justifyContent: "center",
                     }}
                   >
-                    <Icon />
+                    <Icon
+                      sx={{
+                        color:
+                          location.pathname === route ? "white" : "inherit",
+                      }}
+                    />
                   </ListItemIcon>
                   <ListItemText primary={name} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>

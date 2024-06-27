@@ -1,5 +1,5 @@
 import { FC, Suspense, Fragment, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import MUIDrawer from "components/ui/drawer";
 
@@ -13,6 +13,10 @@ const Layout: FC = () => {
     <div className="layout">
       <MUIDrawer>
         <Routes>
+          <Route
+            path={ROUTES.base}
+            element={<Navigate to={ROUTES.tasks} replace />}
+          />
           <Route
             path={ROUTES.tasks}
             element={

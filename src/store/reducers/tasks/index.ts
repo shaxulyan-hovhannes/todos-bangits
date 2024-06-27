@@ -19,15 +19,15 @@ const initialState: TasksState = {
   tasks: [
     {
       id: "1",
-      title: "Title",
-      description: "dslfldsj",
+      title: "Task 1",
+      description: "Task 1 description",
       deadline: new Date().toLocaleDateString(),
       status: "pending",
     },
     {
       id: "2",
-      title: "Title2",
-      description: "dsafk;dskfdslfldsj",
+      title: "Task 2",
+      description: "Task 2 description",
       deadline: new Date().toLocaleDateString(),
       status: "pending",
     },
@@ -40,7 +40,6 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action: PayloadAction<Omit<Task, "id">>) => {
-      console.log("action.payload.deadline", action.payload.deadline);
       const newTask = {
         ...action.payload,
         id: String(Date.now()),
@@ -72,13 +71,13 @@ const tasksSlice = createSlice({
         state.tasks.push(removedTask);
       }
     },
-    markTaskAsComplete: (state, action: PayloadAction<string>) => {
+    markTaskAsComplete: (state, action: PayloadAction<GridRowId>) => {
       const index = state.tasks.findIndex((task) => task.id === action.payload);
       if (index !== -1 && state.tasks[index].status !== "overdue") {
         state.tasks[index].status = "completed";
       }
     },
-    markTaskAsOverdue: (state, action: PayloadAction<string>) => {
+    markTaskAsOverdue: (state, action: PayloadAction<GridRowId>) => {
       const index = state.tasks.findIndex((task) => task.id === action.payload);
       if (index !== -1) state.tasks[index].status = "overdue";
     },

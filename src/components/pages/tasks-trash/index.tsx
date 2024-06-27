@@ -46,6 +46,15 @@ const TasksTrash: FC = () => {
         field: "status",
         headerName: "Status",
         flex: 1,
+        renderCell: (params) => (
+          <span
+            style={{
+              color: "red",
+            }}
+          >
+            {params.value}
+          </span>
+        ),
       },
       {
         field: "deadline",

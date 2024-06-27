@@ -19,7 +19,7 @@ interface TableProps {
   columns: GridColDef[];
   rows: any;
   onRowSelectionModelChange?: (
-    rowSelectionModel: GridRowSelectionModel
+    rowSelectionModel: GridRowSelectionModel,
   ) => void;
   rowSelectionModel?: any;
 }
