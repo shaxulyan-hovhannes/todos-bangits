@@ -146,10 +146,10 @@ const Tasks: FC = () => {
         flex: 1,
       },
     ];
-  }, [selectedTasks, tasks]);
+  }, [selectedTasks, tasks, handleDeleteClick, handleEditClick]);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    const timeout = setTimeout(() => {
       if (Array.isArray(tasks)) {
         const now = new Date();
 
@@ -163,7 +163,7 @@ const Tasks: FC = () => {
       }
     }, 5000);
 
-    return () => clearInterval(intervalId);
+    return () => clearTimeout(timeout);
   }, [tasks]);
 
   return (

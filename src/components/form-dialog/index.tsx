@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import styles from "./index.module.scss";
 
@@ -13,7 +13,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import MUITextField from "components/ui/drawer/text-field/text-field";
+import MUITextField from "components/ui/text-field/text-field";
 
 import { addTask, Task, editTask } from "store/reducers/tasks";
 
